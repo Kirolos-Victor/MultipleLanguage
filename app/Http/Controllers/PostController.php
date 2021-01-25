@@ -23,9 +23,11 @@ class PostController extends Controller
 
     public function store(StorePost $request)
     {
+        //dd($request->all());
         Post::create([
             'title'=>$request->title,
-            'body'=>$request->body
+            'body'=>$request->body,
+            'user_id'=>Auth()->user()->id
         ]);
 
         return redirect(route('posts.index'))->with('message','Success');

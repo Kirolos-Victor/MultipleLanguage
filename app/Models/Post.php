@@ -11,7 +11,7 @@ use Spatie\Translatable\HasTranslations;
 class Post extends Model
 {
     use HasFactory,HasTranslations,SearchableTrait;
-    protected $fillable = ['title','body'];
+    protected $fillable = ['title','body','user_id'];
     public $timestamps = true;
     public $translatable = ['title','body'];
     protected $searchable = [

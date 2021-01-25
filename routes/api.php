@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //in the postman the request type must be POST so i can use the body otherwise i have to use params
 Route::group(['middleware'=>['password']],function(){
     Route::post('posts',[PostController::class,'index']);
+    Route::post('posts/store',[PostController::class,'store']);
+
+});
+Route::group([
+
+    'middleware' =>['api'] ,
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [AuthController::class,'login']);
+    Route::post('logout', [AuthController::class,'logout']);
+    Route::post('refresh', [AuthController::class,'refresh']);
+    Route::post('me', [AuthController::class,'me']);
 });
